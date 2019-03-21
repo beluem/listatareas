@@ -3,70 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>TODO List App</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">   
-    <style>
-        h1{
-            font-size: 1.7em;
-            color:rgb(85, 80, 82) ;
-            text-shadow: 3px 2px rgb(250, 145, 185);
-        }
-        h2{
-            font-size: 1.2em;
-            color:  rgb(27, 29, 28);
-            text-shadow: 3px 2px rgb(120, 248, 205);            
-        }
-        body {
-            background-image: url(fondo1.jpg);
-            background-size: cover;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .container {
-            display: grid;
-            justify-content: center;
-            grid-gap: 10px;
-            padding: 10px;
-        }
-        ul.incomplete-tasks, ul.complete-tasks {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        ul.complete-tasks label.complete {
-            text-decoration: line-through; 
-        }
-        .edit, .delete, .add, .text{
-            border-radius: 8px;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-            padding: 10px 30px;
-        }
-        .edit{
-            background-color: rgb(245, 132, 132);
- 
-        }
-        .delete {
-            background-color: rgb(245, 105, 147);
-
-        }
-        .add {
-            background-color: rgb(39, 212, 154);
-        }
-        .edit:hover , .delete:hover, .add:hover, .text:hover {
-            background-color: #ebc6e0;
-        }
-        .text{
-            background: #f7debd;
-            color: black;
-            margin: 0%;
-            text-align: left;
-            width:200px;
-            height:16px; 
-        }        
-    </style>
+   <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">   -->
+    <link rel="stylesheet" type="text/css" href="styles/styles.css" media="all" />
 </head>
 <body>
     <div class="container">
@@ -76,40 +14,17 @@
             <input id="new-task" type="text" class="text"><button class="add">Agregar</button>
         </p>
 
+        
+
         <h2>Lista de Tareas Pendientes</h2>
        
-        <ul class="incomplete-tasks">
-                <li><label>
-                        <input type="checkbox"/>
-                        Tarea 1
-                    </label>
-                    <br>
-                    <button class="edit">Editar</button> 
-                    <button class="delete">Borrar</button></li>
-                    <br>
-                <li><label>
-                        <input type="checkbox"/>
-                        Tarea 2
-                        <br>
-                    </label>
-                    <button class="edit">Editar</button>
-                    <button class="delete">Borrar</button></li>     
-        </ul>
+        <ul id="incomplete-tasks"></ul>
   
         <h2>Lista de Tareas Completadas</h2>
-        <ul class="complete-tasks">
-                <li><label class="complete">
-                        <input type="checkbox" checked >
-                        Tarea 0
-                    </label>
-                    <br>
-                    <button class="edit">Editar</button>
-                    <button class="delete">Borrar</button></li>
-        </ul> 
-        <footer>
-            Belu © 2019
-        </footer>
+        <ul id="completed-tasks"></ul> 
+        
     </div>
-    
 </body>
+<script type="text/javascript" src="js/ajax.js" async></script>
+<script type="text/javascript" src="js/todolist.js" async></script>
 </html>

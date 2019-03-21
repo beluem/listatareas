@@ -1,0 +1,75 @@
+h1{
+    font-size: 1.7em;
+    color:rgb(85, 80, 82) ;
+    text-shadow: 3px 2px rgb(250, 145, 185);
+}
+h2{
+    font-size: 1.2em;
+    color:  rgb(27, 29, 28);
+    text-shadow: 3px 2px rgb(120, 248, 205);            
+}
+body {
+    background-image: url(fondo1.jpg);
+    background-size: cover;
+    font-family: 'Montserrat', sans-serif;
+}
+.container {
+   
+    display: grid;
+    justify-content: center;
+    grid-gap: 10px;
+    padding: 10px;
+}
+ul.incomplete-tasks, ul.complete-tasks {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ul.complete-tasks label.complete {
+    text-decoration: line-through; 
+}
+.edit, .delete, .add, .text{
+    border-radius: 8px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+.error-bar {
+    border: 1px solid rgb(233, 67, 45);
+    color: rgb(233, 67, 45);
+    font-weight: bold;
+    background-color: #f0d7dd;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 10px;
+}
+
+
+
+.edit{
+    background-color: rgb(245, 132, 132);
+
+}
+.delete {
+    background-color: rgb(245, 105, 147);
+
+}
+.add {
+    background-color: rgb(39, 212, 154);
+}
+.edit:hover , .delete:hover, .add:hover, .text:hover {
+    background-color: #ebc6e0;
+}
+.text{
+    background: #f7debd;
+    color: black;
+    margin: 0%;
+    text-align: left;
+    width:200px;
+    height:16px; 
+}        
+    
