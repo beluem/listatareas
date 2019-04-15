@@ -140,7 +140,7 @@
             // y luego llamar a la función `addTaskToList` que re-creara la tarea con el nuevo estado en el lugar correcto.
             // - No te olvides de llamar al API (método PUT) para modificar el estado de la tarea en el servidor.
             console.log(task);
-            removeTaskFromList(task.id);
+            removeTaskFromList2(task.id);
             let aux = task.status;
            if( e.target.checked ){
             task.status = TASK_STATUS.DONE;
@@ -150,7 +150,7 @@
 
 
            $.ajax({
-            url: API_URL+`task-${task.id}`,
+            url: API_URL+`/${task.id}`,
             type: "PUT",
             dataType:"json",
             headers: {
@@ -159,10 +159,14 @@
             },
             data: JSON.stringify(task),
             success: function(){
-                addTaskToList(task)
+                addTaskToList(task);
+            },
+            error: function(e){
+                alert(e)
             }
-
-            })
+            
+            });
+            
 
         };
     };
@@ -317,9 +321,24 @@
     const removeTaskFromList = (id) => {
         // TODO ITEM 4: remover del DOM HTML el elemento con id `task-${id}`
          
-         let element = document.getElementById(id);
-         element.remove();
+            
+        
+            $("#checkbox").click(function(event) {
+            $("id").remove();
+            });
+       
+                
+
+        
+    };
+
+    const removeTaskFromList2 = (id) => {
+        // TODO ITEM 4: remover del DOM HTML el elemento con id `task-${id}`
          
+        //const checkBox = document.getElementById(`task-${id}`);
+        let checkBox = $('#task-'+id);//$(`task-${id}`)
+        checkBox.remove();
+        
     };
 
     /**
