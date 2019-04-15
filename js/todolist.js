@@ -318,19 +318,6 @@
      * This methods removes the task item associated to the DOM of the page
      * @param id the identifier from the task
      */
-    const removeTaskFromList = (id) => {
-        // TODO ITEM 4: remover del DOM HTML el elemento con id `task-${id}`
-         
-            
-        
-            $("#checkbox").click(function(event) {
-            $("id").remove();
-            });
-       
-                
-
-        
-    };
 
     const removeTaskFromList2 = (id) => {
         // TODO ITEM 4: remover del DOM HTML el elemento con id `task-${id}`
