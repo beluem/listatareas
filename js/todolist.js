@@ -8,7 +8,8 @@
 
 
 
-(() => {
+(($) => {
+
     'use strict';
 
     const API_URL = 'https://task-backend-fpuna.herokuapp.com/tasks';
@@ -30,17 +31,17 @@
      * This method is executed once the page have just been loaded and call the service to retrieve the
      * list of tasks
      */
-    document.onreadystatechange = () => {
-
+    $(document).ready(function(){
         // TODO ITEM 0: Llamar al API con el método GET para recuperar la lista de tareas existentes.
         //  - Como parámetro `callbackSuccess` envía la función `loadTasks`.
         //  - Como parámetro `callbackError` envía una función que llame al método `showError` enviando un mensaje de
         //    error
         //  - La llamada debe ser asíncrona.
-        let parametros ={}
-
-        Ajax.sendGetRequest(API_URL, parametros,MediaFormat.JSON, (value)=>loadTasks(value), (error)=>showError(error), true);
-    };
+      
+            $.get(API_URL, function(value){
+                loadTasks(value)
+            });
+    });
 
     /**
      * This method displays an error on the page.
@@ -65,7 +66,7 @@
      */
     const loadTasks = (array) => {
 
-        let tasks = JSON.parse(array);
+        let tasks = array;
         for (let i in tasks) {
             if (tasks.hasOwnProperty(i)) {
                 addTaskToList(tasks[i]);
@@ -97,7 +98,19 @@
         //  - No te olvides de envíar el parámetro `task` para que se cree la tarea.
 
         newTaskInput.value = "";
-        Ajax.sendPostRequest(API_URL,task,MediaFormat.JSON, (exitoso)=>addTaskToList(exitoso), (error)=>showError(error), true);
+     
+        $.ajax({
+            url:API_URL,
+            type: "POST",
+            dataType:"json",
+            contentType: "application/json",
+            
+            data: JSON.stringify(task),
+            success: function(){
+                addTaskToList(task)
+            }
+
+        })
         
        
 
@@ -136,16 +149,20 @@
            }
 
 
+           $.ajax({
+            url: API_URL+`task-${task.id}`,
+            type: "PUT",
+            dataType:"json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(task),
+            success: function(){
+                addTaskToList(task)
+            }
 
-           Ajax.sendPutRequest(API_URL+"/"+id,task, MediaFormat.JSON,
-            (callbackSuccess) => {
-                                showWarning(200,task.id)
-                               },
-           (callbackError) => {
-                                task.status =aux;
-                                showError(callbackError,'No se pudo modificar la tarea.');
-                           }, false); 
-           addTaskToList(task);
+            })
 
         };
     };
@@ -229,12 +246,24 @@
             //    error
             //  - La llamada debe ser asíncrona.
             //  - No te olvides de envíar el parámetro para que se cree la tarea.
-       
             let param = {
                 "description": currentTask.description
             }
-            Ajax.sendPutRequest(API_URL+"/"+currentTask.id, param , MediaFormat.JSON, (currentTask)=>revertHTMLChangeOnEdit(currentTask), 
-            (error)=>showError(error), true);
+            
+            $.ajax({
+                url: API_URL+"/"+currentTask.id,
+                type: "PUT",
+                dataType:"json",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify(param),
+                success: function(){
+                    revertHTMLChangeOnEdit(currentTask)
+                }
+    
+            })
 
     };
 
@@ -287,8 +316,9 @@
      */
     const removeTaskFromList = (id) => {
         // TODO ITEM 4: remover del DOM HTML el elemento con id `task-${id}`
-         let elemento = document.getElementById('task-${id}');
-         elemento.removeChild();
+         
+         let element = document.getElementById(id);
+         element.remove();
          
     };
 
@@ -304,12 +334,18 @@
         //   - Como parámetro `callbackError` enviar una función que llame al método `showError` enviando
         //     un mensaje de error
         //   - La llamada debe ser asíncrona.
-        Ajax.sendDeleteRequest(API_URL+"/"+id,{}, MediaFormat.JSON,
-            (callbackSuccess) => {
-                                removeTaskFromList(id);
-                                showSuccess(200,'Tarea Eliminada.')
-                               },(error)=>showError(error), false);  
-
-        removeTaskFromList(id);
+        $.ajax({
+            url: API_URL+"/"+id,
+            type: "DELETE",
+            dataType:"json",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            success: function(){
+                removeTaskFromList(id)
+            }
+        })
     };
-})();
+    
+})(jQuery);
