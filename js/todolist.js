@@ -216,9 +216,9 @@
         // We retrieve the value of the attribute data-id;
         const id = e.target.dataset.id;
 
-        let currentDOMTask = $(`task-${id}`);
-        currentDOMTask.find("label > input[type=checkbox]").remove();
-        
+        let currentDOMTask = document.getElementById(`task-${id}`);
+        currentDOMTask.querySelector("label > input[type=checkbox]").remove();
+
         let currentTask = new Task(currentDOMTask.querySelector("label").innerHTML.trim());
         currentTask.id = id;
 
