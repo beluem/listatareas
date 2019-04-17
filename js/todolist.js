@@ -53,10 +53,14 @@
         // manera a mostrar el mensaje de error.
         // El mensaje de error debe desaparacer luego de 3 segundos.
     
-            document.getElementsByClassName("error-bar").innerHTML = text;
-            document.getElementsByClassName("error-bar").innerHTML="";
-            
-      
+           const elem= document.getElementById("error_bar");
+           elem.style.display="block";
+           elem.innerHTML="Ha ocurrido un error: "+ text +"Codigo: "+ code;
+
+           setTimeout(() => {
+               elem.display='none';
+           }, 5000);
+           
     };
 
     /**
@@ -108,13 +112,9 @@
             data: JSON.stringify(task),
             success: function(){
                 addTaskToList(task)
-            }
-
-        })
-        
-       
-
-  
+            },
+            error: showError(callbackError, 'No se obtuvieron los datos necesarios')
+        }); 
     };
 
     /**
